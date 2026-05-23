@@ -69,7 +69,7 @@ const navLinks = [
 // });
 // };
 
-const renderFeatureMap = () => {
+const renderFeaturesMap = () => {
   const cardsHTML = services.map(service => {
     return `
     <article class="feature-card">
@@ -89,10 +89,18 @@ const renderFeatureMap = () => {
 const renderNavigation = () => {
   // Desktop nav
   if (nav) {
-    const navHTML = navLinks.map((link) => {
-      
+    const navHTML = navLinks
+      .map((link) => {
+        return `
+        <a href="${link.href}" class="nav-link">
+          ${link.label}
+        </a>
+      `;
     })
-  }
+    .join(""); //.join is needed to convery the array of string into one big string that we use without commas in between
+    //we use empty string ("") as a seperator because we dont want anything in between the links (no commas, spaces, dashes, etc)
+    nav.innerHTML = navHTML // this is where we insert the generated HTML into the pasge
+  } // innerHTML is a property that allows us to set the HTML content of an element. When we set it, the browser parses the string as HTML and creates the corresponding DOM elements. In this case, it will create <a> elements inside the nav based on our navLinks data. 
 }
 
 // ----- Helpers / Functions -----
@@ -191,5 +199,5 @@ if (callBtn) {
     }
   });
 }
-renderFeatures();
+renderFeaturesMap();
 renderNavigation();
