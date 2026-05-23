@@ -49,42 +49,51 @@ const navLinks = [
 
 // Render feature using forEach
 
-const renderFeatures = () => {
+// const renderFeatures = () => {
 
-    if (!featureGrid) return;
+//     if (!featureGrid) return;
 
-    services.forEach(service => { //calls the array name and use forEach to loop through it service is the paramater the represents each item in the array as we loop through it
+//     services.forEach(service => { //calls the array name and use forEach to loop through it service is the paramater the represents each item in the array as we loop through it
 
-    const card = document.createElement("article");
-    //creating the element
-    card.classList.add("feature-card");
+//     const card = document.createElement("article");
+//     //creating the element
+//     card.classList.add("feature-card");
 
-    card.innerHTML = `
-    <img src="${service.image}" alt="${service.title}" class="feature-img" />
-    <h3 class="feature-title">${service.title}</h3>
-    <p class="feature-text">${service.text}</p>
-    `; //insert data into the card using template literals
+//     card.innerHTML = `
+//     <img src="${service.image}" alt="${service.title}" class="feature-img" />
+//     <h3 class="feature-title">${service.title}</h3>
+//     <p class="feature-text">${service.text}</p>
+//     `; //insert data into the card using template literals
 
-    featureGrid.appendChild(card);
-});
+//     featureGrid.appendChild(card);
+// });
+// };
+
+const renderFeatureMap = () => {
+  const cardsHTML = services.map(service => {
+    return `
+    <article class="feature-card">
+      <img src="${service.image}" alt="${service.title}" class="feature-img" />
+      <h3 class="feature-title">${service.title}</h3>
+      <p class="feature-text">${service.text}</p>
+    </article>
+    `;
+  })
+  .join("");
+
+  featureGrid.innerHTML = cardsHTML;
 };
 
-//const renderFeaturesMap = () => {
-    //const cardsHTML = services.map(service => {
-        // return`
-        // <article class="feature-card">
-        // <img src="${service.image}" alt="${service
-        // .title}" class="feature-img" />
-        //<h3 class="feature-title">${service.title}</h3>
-        // <p class="feature-text">${service.text}</p>
-        //})}
+// -------- Render Navigation Using Map() --------------
 
-
-
-    //Desktop Nav
-    // if (nav) {
-    //     const navHTML = navLinks.map(link => )
-    // }
+const renderNavigation = () => {
+  // Desktop nav
+  if (nav) {
+    const navHTML = navLinks.map((link) => {
+      
+    })
+  }
+}
 
 // ----- Helpers / Functions -----
 
