@@ -18,6 +18,8 @@ const featureGrid = document.getElementById("featureGrid");
 
 const nav = document.getElementById("nav");
 
+const siteHeader = document.querySelector(".site-header");
+
 // ------------------Services Data (Array of objects)----------------
 
 const services = [
@@ -44,7 +46,7 @@ const navLinks = [
     { label: "Home", href: "#hero"},
     { label: "Services", href: "#features"},
     { label: "Book", href: "#cta"},
-    { label: "Contact", href: "footer"}
+    { label: "Contact", href: "#footer"}
 ];
 
 // Render feature using forEach
@@ -97,13 +99,36 @@ const renderNavigation = () => {
         </a>
       `;
     })
-    .join(""); //.join is needed to convery the array of string into one big string that we use without commas in between
+    .join(""); //.join is needed to convert the array of string into one big string that we use without commas in between
     //we use empty string ("") as a seperator because we dont want anything in between the links (no commas, spaces, dashes, etc)
     nav.innerHTML = navHTML // this is where we insert the generated HTML into the pasge
   } // innerHTML is a property that allows us to set the HTML content of an element. When we set it, the browser parses the string as HTML and creates the corresponding DOM elements. In this case, it will create <a> elements inside the nav based on our navLinks data. 
 }
 
+// Mobile Nav
+if (mobileMenu) {
+    const mobileHTML = navLinks.map(link => {
+        return`
+        <a href="${link.href}" class="mobile-link">
+          ${link.label}
+          </a>
+          `;
+    }) .join("");
+    
+    mobileMenu.innerHTML = mobileHTML;
+}
+
 // ----- Helpers / Functions -----
+
+const handleHeaderOnScroll = () => {
+    if (!siteHeader) return;
+    
+    if (window.scrollY > 10) {
+      siteHeader.classList.add("is-scrolled");
+    } else {
+      siteHeader.classList.remove("is-scrolled");
+    }
+};
 
 // Update footer year automatically
 
@@ -155,6 +180,8 @@ const updateHeadingText = (newText) => {
 
 setCurrentYear();
 
+window.addEventListener("scroll", handleHeaderOnScroll);
+
 // 2) Hamburger menu toggle
 
 if (menuBtn) {
@@ -199,5 +226,6 @@ if (callBtn) {
     }
   });
 }
+handleHeaderOnScroll();
 renderFeaturesMap();
 renderNavigation();
