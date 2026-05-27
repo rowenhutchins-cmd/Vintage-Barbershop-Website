@@ -20,6 +20,8 @@ const nav = document.getElementById("nav");
 
 const siteHeader = document.querySelector(".site-header");
 
+const cardsContainer = document.querySelector(".cards-container");
+
 // ------------------Services Data (Array of objects)----------------
 
 const services = [
@@ -182,6 +184,12 @@ setCurrentYear();
 
 window.addEventListener("scroll", handleHeaderOnScroll);
 
+// Run once on page load in case user refreshes mid scroll
+handleHeaderOnScroll();
+
+// Initialize when the page loads
+document.addEventListener('DOMContentLoaded', createCardShiftEffect);
+
 // 2) Hamburger menu toggle
 
 if (menuBtn) {
@@ -226,6 +234,55 @@ if (callBtn) {
     }
   });
 }
-handleHeaderOnScroll();
+
+// Card shift function: cards shift LEFT when scrolling Down, RIGHT when scrolling up.
+function createCardShiftEffect() {
+    const cardsContainer = featureGrid; //reuse your existing variable (no new query needed)
+    
+    if (!cardsContainer) {
+        console.warn("Feature grid not found for card shift effect.");
+        return;
+    }
+    
+    //Use CSS custom property for smooth updates
+    cardsContainer.style.setProperty('--translate-x', '0px');
+    
+    let lastScrollY = window.scrollY;
+    
+    const handleScroll = () => {
+        const currentScrollY = window.scrollY;
+        const deltaY = currentScrollY - lastScrollY; //positive = scroll down
+        
+        let currentTranslate = parseFloat(getComputedStyle(cardsContainer).getPropertyValue('--translate-x')) || 0;
+        
+        //sensitivity: negative = shift LEFT on scroll DOWN, positive would reverse it
+        
+        const sensitivity = -1.8;
+        let newTranslate = currentTranslate + (deltaY * sensitivity);
+        
+        // Optional soft limits so it doesnt fly off too far
+        const maxShift = 600;
+        newTranslate = Math.max(-maxShift, Math.min(maxShift, newTranslate));
+        
+        cardsContainer.style.setProperty('--translate-x', `${newTranslate}px`);
+        
+        lastScrollY = currentScrollY;
+    };
+    
+    //High performance scroll listener (akready in your file)
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                handleScroll();
+            ticking = false;
+            });
+            ticking = true;
+        }
+    }, {passive: true});
+    
+    console.log('✅Card shift effect initilaize (left on down / right on up)');
+};
+
 renderFeaturesMap();
 renderNavigation();

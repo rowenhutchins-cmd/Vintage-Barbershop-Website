@@ -350,6 +350,7 @@ body {
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
 
   border: 1px solid rgba(58, 45, 40, 0.12);
+  
 }
 
 .feature-img {
@@ -524,3 +525,35 @@ body {
   }
 }
  
+
+/* ============= CARD SHIFT EFFECT ============ */
+/* Enables horizontal sliding on vertical scroll */
+.feature-grid {
+    display: flex !important;  /* Overrides grid on all size for smooth shift */
+    gap: 18px;
+    flex-wrap: nowrap;
+    padding: 20px 0;
+    will-change: transform;
+    transition: transform 0.09s cubic-bezier(0.25, 0.1, 0.25. 1);
+    transform: translateX(var(--translate-x, 0px));
+}
+
+/* #featureGrid {
+  transform: translateX(var(--translate-x, 0px));
+  transition: transform 0.2s cubic-bezier(0.4,0,0.2,1);
+} */
+
+/* Individual cards become fixed-width so they slide as a group */
+.feature-card {
+    flex: 0 0 340px;
+    min-width: 340px;
+}
+
+/* responsive tweak for smaller screens */
+@media (max-width: 900px) {
+    .feature-card {
+        flex: 0 0 290px;
+        min-width: 290px;
+    }
+}
+
