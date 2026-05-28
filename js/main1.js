@@ -1,10 +1,20 @@
-// ----- DOM Elements -----
+// ============================
+// File: js/main.js
+// Vintage Barber Shop project
+//=============================
 
+// ----- DOM Elements -----
 const yearEl = document.getElementById("year");
+
+const nav = document.getElementById("nav");
 
 const menuBtn = document.getElementById("menuBtn");
 
 const mobileMenu = document.getElementById("mobileMenu");
+
+const featureGrid = document.getElementById("featureGrid");
+
+const hoursList = document.getElementById("hoursList"); 
 
 const ctaBtn = document.getElementById("ctaBtn");
 
@@ -12,44 +22,149 @@ const callBtn = document.getElementById("callBtn");
 
 const phoneLink = document.getElementById("phoneLink");
 
+const addressLink = document.getElementById("addressLink");
+
+const emailLink = document.getElementById("emailLink");
+
 const heading = document.getElementById("heroHeading");
 
-const featureGrid = document.getElementById("featureGrid");
+const heroSubtext = document.getElementById("heroSubtext");
 
-const nav = document.getElementById("nav");
+// -------- Modal elements --------------
+const serviceModal = document.getElementBydId("serviceModal");
 
-const siteHeader = document.querySelector(".site-header");
+const serviceModalOverlay = document.getElementById("serviceModalOverlay");
 
-const cardsContainer = document.querySelector(".cards-container");
+const serviceModalClose = document.getElementById("serviceModalClose");
 
-// ------------------Services Data (Array of objects)----------------
+const serviceModalTitle = document.getElementById("serviceModalTitle");
 
-const services = [
-    {
-        title: "Classic Haircut",
-        text: "Timeless cuts with modern precision tailored to your style.",
-        image: "assets/feature-1.jpg"
-    },
-    {
-        title: "Beard Trim",
-        text: "Shape and line-up your beard for a clean, sharp finish",
-        image: "assets/feature-2.jpg"
-    },
-    {
-        title: "Straight Razor Shave",
-        text: "Hot towel treatment with a smooth traditional shave",
-        image: "assets/feature-3.jpg"
-    }
-];
+const serviceModalPrice = document.getElementById("serviceModalPrice");
 
-// -----------Navigation Data (Array of Objects)--------------------
+const serviceModalList = document.getElementById("serviceModalList");
 
+// - Main Shop Object ---------
+const shopInfo = {
+    name: "Vintage Barbershop",
+    address: "123 Main St, Your City, USA",
+    phoneDisplay: "(555) 123-4567",
+    phoneRaw: "5551234567",
+    email: "hello@vintagebarbershop.com",
+};
+
+// -------Navigation Data --------------
 const navLinks = [
     { label: "Home", href: "#hero"},
     { label: "Services", href: "#features"},
     { label: "Book", href: "#cta"},
     { label: "Contact", href: "#footer"}
 ];
+
+// ------------------Services Data ----------------
+const services = [
+    {
+        id: 1,
+        title: "Classic Haircut",
+        image: "assets/feature-1.jpg",
+        alt: "Classic Haircut",
+        description: "Timeless cuts with modern precision-tailored to your style.",
+        price: 25,
+        popular: true,
+        details: [
+            "Consultation with your barber before the cut begins.",
+            "Hair sectioning and shape-up based on your preffered style.",
+            "Professional clippers, trimmers, and shears used for precision.",
+            "Neckline cleanup and finishing touches included.",
+            "Light styling product applied for a clean final look."
+        ],
+    },
+    {
+        id: 2,
+        title: "Beard Trim",
+        image: "assets/feature-4.jpeg",
+        alt: "Beard Trim",
+        description: "Shape, line-up, and refine your beard for a clean finish.",
+        price: 15,
+        popular: false,
+        details: [
+            "Beard assessment and shaping based on face structure.",
+            "Line-up around cheeks, jawline, and neckline.",
+            "Trimmers and detail tools used for crisp edges.",
+            "Conditioning beard product may be applied for softness.",
+            "Final symmetry check for a polished finish."
+        ],
+    },
+    {
+        id: 3,
+        title: "Straight Razor Shave",
+        image: "assets/feature-3.jpg",
+        alt: "Straight Razor Shave",
+        description: "Hot towel, smooth shave, and a classic barbershop experience.",
+        price: 30,
+        popular: true,
+        details: [
+            "Hot towel prep to soften facial hair and open pores.",
+            "Premium shaving cream or lather applied to protect the skin.",
+            "Straight razor shave performed with careful detailing.",
+            "Second hot towel may be used for comfort and cleanup.",
+            "Aftershave or soothing skin product applied after service."
+        ],
+    },
+    {
+        id: 4,
+        title: "Fade & Style",
+        image: "assets/feature-2.jpg",
+        alt: "Fade haircut",
+        description: "A clean fade with finishing detail for a sharp, modern look.",
+        price: 35,
+        popular: false,
+        details: [
+            "Style consultation before clipper work begins.",
+            "Fade blended to your preffered level and finish.",
+            "Detailing around temples, neckline, and beard area if needed.",
+            "Scissors and clipper-over-comb may be used for texture.",
+            "Styling product added to complete the final look."
+        ],
+    },
+    {
+        id: 5,
+        title: "",
+        image: "assets/feature-1.jpg",
+        alt: "",
+        description: "",
+        price: ,
+        popular: ,
+        details: [
+            ".",
+            ".",
+            ".",
+            ".",
+            "."
+        ],
+    }, 
+    {
+        id: 6,
+        title: "",
+        image: "",
+        alt: "",
+        description: "",
+        price: ,
+        popular: ,
+        details: [
+            ".",
+            ".",
+            ".",
+            ".",
+            "."
+        ],
+    };
+]
+
+
+
+// -----------Navigation Data (Array of Objects)--------------------
+
+
 
 // Render feature using forEach
 
